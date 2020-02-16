@@ -8,7 +8,50 @@ const bgImage = {
 };
 
 class SignUp extends React.Component {
+	
+ constructor() {
+        super();
 
+        this.state = {
+            email: '',
+            username: '',
+            password: '',
+            passwordComfirm: '',
+        }
+		
+		this.onEmailChange = this.onEmailChange.bind(this);
+      	this.onSubmit = this.onSubmit.bind(this);
+		this.onUsernameChange = this.onUsernameChange.bind(this);
+		this.onpasswordChange = this.onpasswordChange.bind(this);
+		this.onpasswordComfirmChange = this.onpasswordComfirmChange.bind(this);
+
+    }
+	
+	onEmailChange(e){
+		this.setState({email:e.target.value});
+	}
+	
+	onUsernameChange(e){
+		this.setState({username:e.target.value});
+	}
+	
+	onpasswordChange(e){
+		this.setState({password:e.target.value});
+	}
+	
+	onpasswordComfirmChange(e){
+		this.setState({passwordComfirm:e.target.value});
+	}
+	
+	onSubmit(){
+		let email = this.state.email;
+		let username = this.state.username;
+		let password = this.state.password;
+		let passwordComfirm = this.state.passwordComfirm;
+		
+		alert(email+'/'+username+'/'+password+'/'+passwordComfirm);
+	}
+	
     render() {
         return (
             <div className="container-login" style={bgImage}>
@@ -18,30 +61,39 @@ class SignUp extends React.Component {
                         <div className="col-md-6" style={{ marginTop: "60px" }}>
                             <div className="panel panel-primary">
                                 <div className="panel-heading">ลงทะเบียน</div>
-                                <form style={{ padding: "30px" }}>
+                                <form style={{ padding: "30px" }} onSubmit={this.onSubmit}>
                                     <div className="form-group input-group">
                                         <span className="input-group-addon">@</span>
-                                        <input type="text" className="form-control" placeholder="อีเมล" aria-describedby="sizing-addon1" />
+                                        <input type="text" className="form-control" 
+										placeholder="อีเมล" 
+										aria-describedby="sizing-addon1" 
+										onChange={this.onEmailChange} />
                                     </div>
 
                                     <div className="form-group input-group ">
                                         <div className="input-group-addon">
                                             <span className="input-group-text"> <i className="glyphicon glyphicon-user"></i> </span>
                                         </div>
-                                        <input name="" className="form-control" placeholder="ชื่อผู้ใช้งาน" type="text" />
+                                        <input name="" className="form-control" 
+										placeholder="ชื่อผู้ใช้งาน" type="text" 
+										onChange={this.onUsernameChange}/>
                                     </div>
 
                                     <div className="form-group input-group ">
                                         <div className="input-group-addon">
                                             <span className="input-group-text"> <i className="glyphicon glyphicon-lock"></i> </span>
                                         </div>
-                                        <input name="" className="form-control" placeholder="รหัสผ่าน" type="text" />
+                                        <input name="" className="form-control" 
+										placeholder="รหัสผ่าน" type="text" 
+										onChange={this.onpasswordChange}/>
                                     </div>
                                     <div className="form-group input-group ">
                                         <div className="input-group-addon">
                                             <span className="input-group-text"> <i className="glyphicon glyphicon-lock"></i> </span>
                                         </div>
-                                        <input name="" className="form-control" placeholder="ยืนยันรหัสผ่าน" type="text" />
+                                        <input name="" className="form-control" 
+										placeholder="ยืนยันรหัสผ่าน" type="text" 
+										onChange={this.onpasswordComfirmChange}/>
                                     </div>
 
                                     <div className="form-group">
