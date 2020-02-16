@@ -9,6 +9,46 @@ const bgImage = {
 };
 
 class SignIn extends React.Component {
+	
+		
+ constructor() {
+        super();
+
+        this.state = {
+            username: '',
+            password: '',
+        }
+		
+		this.onUsernameChange = this.onUsernameChange.bind(this);
+		this.onPasswordChange = this.onPasswordChange.bind(this);
+		this.onSubmit = this.onSubmit.bind(this);
+
+    }
+	
+	onUsernameChange(e){
+		this.setState({username:e.target.value});
+	}
+	onPasswordChange(e){
+		this.setState({password:e.target.value});
+	}
+	
+	onSubmit(){
+		let strUsername = this.state.username;
+		let srtPassword = this.state.password;
+		
+		let url ='http://localhost/CI_APITRAINING/Authen/login?username='+strUsername+'&password='+srtPassword;
+			
+			fetch(url)
+			.then(res => res.json())
+			.then(result => {
+					alert(result[0].message);
+				
+			},(error) => {
+				alert('Error');
+			});
+	}
+	
+	
     render() {
 
         return (
@@ -19,14 +59,14 @@ class SignIn extends React.Component {
                         <div className="account-wall">
                             <h4 className="text-center">เข้าสู่ระบบ</h4>
                             <img className="logo-img" src={logo} alt="" />
-                            <form className="form-signin" onSubmit={this.handleSubmit}>
+                            <form className="form-signin" onSubmit={this.onSubmit}>
                                 <div className="txtInput">
-                                    <input type="text" className="form-control" placeholder="อีเมล" required autofocus
-                                    />
+                                    <input type="text" className="form-control" placeholder="ชือผู้ใช้งาน" required autofocus
+                                    onChange={this.onUsernameChange}/>
                                 </div>
                                 <div className="txtInput">
                                     <input type="password" className="form-control" placeholder="รหัสผ่าน" required autofocus
-                                    />
+                                    onChange={this.onPasswordChange} />
                                 </div>
                                 <div className="txtInput">
                                     <button className="btn btn-sm btn-primary btn-block" type="submit">เข้าสู่ระบบ</button>

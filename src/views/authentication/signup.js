@@ -17,6 +17,8 @@ class SignUp extends React.Component {
             username: '',
             password: '',
             passwordComfirm: '',
+			name: '',
+			
         }
 		
 		this.onEmailChange = this.onEmailChange.bind(this);
@@ -24,6 +26,7 @@ class SignUp extends React.Component {
 		this.onUsernameChange = this.onUsernameChange.bind(this);
 		this.onpasswordChange = this.onpasswordChange.bind(this);
 		this.onpasswordComfirmChange = this.onpasswordComfirmChange.bind(this);
+		this.onNameChange = this.onNameChange.bind(this);
 
     }
 	
@@ -43,13 +46,36 @@ class SignUp extends React.Component {
 		this.setState({passwordComfirm:e.target.value});
 	}
 	
+	onNameChange(e){
+		this.setState({name:e.target.value});
+	}
+	
 	onSubmit(){
-		let email = this.state.email;
-		let username = this.state.username;
-		let password = this.state.password;
-		let passwordComfirm = this.state.passwordComfirm;
+		let strEmail = this.state.email;
+		let strUsername = this.state.username;
+		let srtPassword = this.state.password;
+		let srtPasswordComfirm = this.state.passwordComfirm;
+		let strName = this.state.name;
 		
-		alert(email+'/'+username+'/'+password+'/'+passwordComfirm);
+		if(strEmail =='' || strUsername =='' || srtPassword ==''){
+			alert('กรุณากรอกข้อมูลให้ครบ')
+		}
+		else if(srtPassword!=srtPasswordComfirm){
+			alert('รหัสผ่านทั้งสองช่องไม่ตรงกัน')
+		}else{
+			let url ='http://localhost/CI_APITRAINING/Authen/register?email='+strEmail+'&name='+strName+'&username='+strUsername+'&password='+srtPasswordComfirm;
+			
+			fetch(url)
+			.then(res => res.json())
+			.then(result => {
+				alert(result[0].message);
+				//console.log(result)
+			},(error) => {
+				alert('Error');
+			});
+		}
+		
+		
 	}
 	
     render() {
@@ -77,6 +103,15 @@ class SignUp extends React.Component {
                                         <input name="" className="form-control" 
 										placeholder="ชื่อผู้ใช้งาน" type="text" 
 										onChange={this.onUsernameChange}/>
+                                    </div>
+									
+									 <div className="form-group input-group ">
+                                        <div className="input-group-addon">
+                                            <span className="input-group-text"> <i className="glyphicon glyphicon-list"></i> </span>
+                                        </div>
+                                        <input name="" className="form-control" 
+										placeholder="ชื่อ-นามสกุล" type="text" 
+										onChange={this.onNameChange}/>
                                     </div>
 
                                     <div className="form-group input-group ">
