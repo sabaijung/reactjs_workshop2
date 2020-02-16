@@ -29,6 +29,7 @@ class SignIn extends React.Component {
 	onUsernameChange(e){
 		this.setState({username:e.target.value});
 	}
+	
 	onPasswordChange(e){
 		this.setState({password:e.target.value});
 	}
@@ -44,14 +45,14 @@ class SignIn extends React.Component {
 			.then(result => {
 					//alert(result[0].message);
 				if(result[0].flag=='1'){
-					this.props.history.push('/singup');
 					alert(result[0].message);
+					this.props.history.push('/singup');
 				}else{
 					alert(result[0].message);
 				}
 
 			},(error) => {
-				alert('Error');
+				alert(error);
 			});
 	}
 	
