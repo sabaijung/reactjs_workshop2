@@ -68,8 +68,14 @@ class SignUp extends React.Component {
 			fetch(url)
 			.then(res => res.json())
 			.then(result => {
-				alert(result[0].message);
-				//console.log(result)
+				//alert(result[0].message);
+				if(result[0].flag == '1'){
+					alert(result[0].message);
+					this.props.history.push('/singin');
+				}else{
+					alert(result[0].message);
+				}
+				
 			},(error) => {
 				alert('Error');
 			});

@@ -18,7 +18,7 @@ class Blanklayout extends React.Component {
               />
             ) : null;
           })}
-          <Redirect from="/" to="signup" />
+          <Redirect from="/" to="signin" />
         </Switch>
       </div>
     );

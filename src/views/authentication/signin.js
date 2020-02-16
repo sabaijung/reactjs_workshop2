@@ -1,4 +1,5 @@
 import React from 'react';
+import {Redirect} from 'react-router-dom';
 
 import logo from '../../assets/images/kru.png';
 import bg from '../../assets/images/bg-01.jpg';
@@ -41,8 +42,14 @@ class SignIn extends React.Component {
 			fetch(url)
 			.then(res => res.json())
 			.then(result => {
+					//alert(result[0].message);
+				if(result[0].flag=='1'){
+					this.props.history.push('/singup');
 					alert(result[0].message);
-				
+				}else{
+					alert(result[0].message);
+				}
+
 			},(error) => {
 				alert('Error');
 			});
